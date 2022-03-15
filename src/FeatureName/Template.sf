@@ -23,7 +23,7 @@ This file is just reference, you can remove unnecessary lines.
 // BPIC/LibraryName is prefix from blackprint.config.js
 
 // Element name based on html path, BPIC/LibraryName/FeatureName/Template.sf
-bpic-libraryname-featurename-template{
+bpic-libraryname-featurename-template {
   /* Write your scoped SCSS here */
   .design-me{
     color: yellow;
@@ -57,9 +57,6 @@ class IMyTemplate extends Context.IFace.MyTemplate {
   constructor(node){
     super(node); // 'node' object from .registerNode
 
-    // Constructor for Interface can be executed twice when using Cloned Container
-    // If you're assigning data on this contructor, you should check if it already has the data
-    if(this.keepMe !== undefined) return;
     this.keepMe = $('<div>');
     this.keepMe.text("Hello world!");
     this.keepMe.css({
@@ -88,7 +85,7 @@ class IMyTemplate extends Context.IFace.MyTemplate {
     const {
       IInput, IOutput, // Port interface
       Input, Output, // Port value
-    } = My.const; // My.const === this.const
+    } = My.ref; // My.ref === this.ref
 
     // Update the port value
     Output.PortName2 = 123; // This will also trigger 'value' event to connected input ports
@@ -102,8 +99,8 @@ class IMyTemplate extends Context.IFace.MyTemplate {
     IInput.PortName1
       // When connected output node have updated the value
       // Also called after 'connect' event
-      .on('value', Context.EventSlot, function(target){
-        console.log("PortName1:", target);
+      .on('value', Context.EventSlot, function(ev){
+        console.log("PortName1:", ev);
       })
 
       // When connection success

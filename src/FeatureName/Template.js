@@ -4,8 +4,20 @@
 // Node will be initialized first by Blackprint Engine
 // This should be used for initialize port structure and set the target interface
 Blackprint.registerNode('LibraryName/FeatureName/Template',
-class MyTemplate extends Blackprint.Node{
+class MyTemplate extends Blackprint.Node {
 	// this == node
+
+	// You can use type data like Number/String or "Blackprint.Port"
+	// use "Blackprint.Port.Trigger" if it's callable port
+	static input = {
+		PortName1: Blackprint.Port.Default(Number, 123)
+	};
+
+	// Output only accept 1 type data
+	// use "Function" if it's callable port
+	static output = {
+		PortName2: Number
+	};
 
 	constructor(instance){
 		super(instance);
@@ -16,18 +28,6 @@ class MyTemplate extends Blackprint.Node{
 		let iface = this.setInterface('BPIC/LibraryName/FeatureName/Template');
 		iface.title = 'My Title';
 		iface.description = 'My Description';
-
-		// You can use type data like Number/String or "Blackprint.Port"
-		// use "Blackprint.Port.Trigger" if it's callable port
-		this.input = {
-			PortName1: Blackprint.Port.Default(Number, 123)
-		};
-
-		// Output only accept 1 type data
-		// use "Function" if it's callable port
-		this.output = {
-			PortName2: Number
-		};
 	}
 
 	// Put logic as minimum as you can in .registerNode
@@ -36,18 +36,26 @@ class MyTemplate extends Blackprint.Node{
 		// Called before iface.init()
 	}
 
+	// This is more recomended than using event listener "port.value" or "value"
 	update(){
 		// Triggered when any output value from other node are updated
 		// And this node's input connected to that output
 	}
 
-	request(){
+	imported(data){
+		// When this node was successfully imported
+		// iface can also has this function feature, please use one only
+	}
+
+	request(port, sourceIface){
 		// Triggered when other connected node is requesting
 		// output from this node that have empty output
 	}
 
-	imported(){
-		// When this node was successfully imported
+	// Add support for remote sync (this will receive data from .syncOut)
+	syncIn(eventName, value){
+		if(eventName === 'data.value')
+			this.iface.data.value = value;
 	}
 });
 
@@ -61,17 +69,21 @@ Context.IFace.MyTemplate = class IMyTemplate extends Blackprint.Interface {
 	constructor(node){
 		super(node); // 'node' object from .registerNode
 
-		// Constructor for Interface can be executed twice when using Cloned Container
-		// If you're assigning data on this contructor, you should check if it already has the data
-		if(this.myData !== undefined) return;
 		this.myData = 123;
 		this._log = '...';
 
 		// If the data was stored on this, they will be exported as JSON
 		// (Property name with _ or $ will be ignored)
 		this.data = {
+			_iface: this,
 			get value(){ return this._value },
-			set value(val){ this._value = val },
+			set value(val){
+				this._value = val;
+
+				// Add support for remote sync: .syncOut(eventName, value);
+				// The data will be received in: syncIn(event, value);
+				this._iface.node.syncOut('data.value', val);
+			},
 		};
 
 		// Creating object data with class is more recommended
@@ -89,13 +101,12 @@ Context.IFace.MyTemplate = class IMyTemplate extends Blackprint.Interface {
 
 		// ====== Port Shortcut ======
 		const {
-			IInput, IOutput, IProperty, // Port interface
-			Input, Output, Property, // Port value
-		} = this.const;
+			IInput, IOutput, // Port interface
+			Input, Output, // Port value
+		} = this.ref;
 
 		// Port interface can be used for registering event listener
 		// Port value can be used for get/set the port value
-		// By the way, Property is reserved feature, don't use it
 
 		// this.output === IOutput
 		// this.input === IInput
@@ -104,6 +115,8 @@ Context.IFace.MyTemplate = class IMyTemplate extends Blackprint.Interface {
 
 		// this.output.Test => Port Interface
 		// this.node.output.Test => Number value
+
+		// For some event listener please see on ./Template.sf
 	}
 
 	// Create custom getter and setter
