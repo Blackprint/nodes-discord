@@ -34,7 +34,6 @@
     "jest": "28.x",
     "jest-environment-jsdom": "28.x",
     "jest-environment-node": "28.x",
-    "node-fetch": "^3.2.0",
     "scarletsframe": "0.35.x",
     "socket.io": "^4.4.1"
   },

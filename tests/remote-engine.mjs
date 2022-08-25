@@ -7,11 +7,9 @@ import { Server } from "socket.io";
 import dotenv from 'dotenv';
 
 dotenv.config();
-Blackprint.Environment.import(process.env);
-
-globalThis.window = globalThis;
-globalThis.fetch = await import('node-fetch');
-globalThis.crypto = (await import('crypto')).webcrypto;
+Blackprint.Environment.import({
+	DISCORD_TOKEN: process.env.DISCORD_TOKEN,
+});
 
 let port = 2345;
 let httpServer = createServer();
