@@ -1,15 +1,15 @@
-[![NPM](https://img.shields.io/npm/v/bp-your-nodes.svg)](https://www.npmjs.com/package/bp-your-nodes)
-[![Build Status](https://github.com/blackprint/template-js/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/blackprint/template-js/actions/workflows/build.yml)
+[![NPM](https://img.shields.io/npm/v/@blackprint/nodes-discord.svg)](https://www.npmjs.com/package/@blackprint/nodes-discord)
+[![Build Status](https://github.com/blackprint/template-js/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/blackprint/template-js/actions/workflows/build.yml)
 
-## Your project name
-Description here
+## Discord.js nodes for Blackprint
+This module gives you an ability to use [Discord.js](https://discord.js.org/) with [Blackprint](https://github.com/Blackprint/Blackprint).
 
 ## Import this nodes from URL
 Please specify the version to avoid breaking changes.
 
 ```js
 Blackprint.loadModuleFromURL([
-  'https://cdn.jsdelivr.net/npm/bp-your-nodes@0.0.1/dist/nodes-rename-me.mjs'
+  'https://cdn.jsdelivr.net/npm/@blackprint/nodes-discord@0.0.1/dist/nodes-discord.mjs'
 ], {
   // Turn this on if you want to load .sf.js, and .sf.css
   // only with single .mjs
@@ -19,7 +19,7 @@ Blackprint.loadModuleFromURL([
 
 ## Development URL
 You can use this link to load unpublished nodes and still under development on GitHub.
-> `https://cdn.jsdelivr.net/gh/blackprint/template-js@dist/nodes-rename-me.mjs?1`
+> `https://cdn.jsdelivr.net/gh/blackprint/nodes-discord@dist/nodes-discord.mjs?1`
 
 Please append `/url-here?random-number` if your browser still using the cached files after the repository was updated.
 
