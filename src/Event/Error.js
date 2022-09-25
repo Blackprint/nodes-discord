@@ -36,13 +36,10 @@ class extends Blackprint.Node {
 });
 
 /*
-apiRequest
-apiResponse
 channelCreate
 channelDelete
 channelPinsUpdate
 channelUpdate
-debug
 emojiCreate
 emojiDelete
 emojiUpdate
@@ -65,7 +62,6 @@ guildUnavailable
 guildUpdate
 interactionCreate
 invalidated
-invalidRequestWarning
 inviteCreate
 inviteDelete
 messageCreate
@@ -82,11 +78,6 @@ ready
 roleCreate
 roleDelete
 roleUpdate
-shardDisconnect
-shardError
-shardReady
-shardReconnecting
-shardResume
 stageInstanceCreate
 stageInstanceDelete
 stageInstanceUpdate
