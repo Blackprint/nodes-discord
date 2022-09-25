@@ -34,6 +34,8 @@ class extends Blackprint.Node {
 	}
 
 	disconnect(){
+		let {Output} = this.ref; 
+
 		this.ref.Output.Client?.destroy();
 		Output.Ready = false;
 	}
