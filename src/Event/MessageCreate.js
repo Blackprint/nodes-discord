@@ -38,6 +38,8 @@ class extends Blackprint.Node {
 		let { Input, Output } = this.ref; // Shortcut
 		let client = Input.Client; // Store reference to variable
 
+		if(client == null) return;
+
 		this.unlisten = () => client.off('messageCreate', this._callback);
 		client.on('messageCreate', this._callback = (msg) => {
 			if(msg.author?.bot) return; // Skip bot event
