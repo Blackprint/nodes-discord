@@ -18,8 +18,8 @@ Blackprint.loadModuleFromURL([
 ```
 
 ## Development URL
-You can use this link to load unpublished nodes and still under development on GitHub.
-> `https://cdn.jsdelivr.net/gh/blackprint/nodes-discord@dist/nodes-discord.mjs?1`
+You can use this link to load unpublished nodes and still under development on GitHub.<br>
+https://cdn.jsdelivr.net/gh/blackprint/nodes-discord@dist/nodes-discord.mjs?1
 
 Please append `/url-here?random-number` if your browser still using the cached files after the repository was updated.
 

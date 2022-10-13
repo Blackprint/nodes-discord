@@ -1,7 +1,12 @@
 // node --no-warnings --loader ./node_modules/@blackprint/engine/es6-https-loader.mjs ./tests/remote-engine.mjs
 
-import '@blackprint/engine';
-import '@blackprint/remote-control';
+// Comment this if you want to use published version of the module
+import '../../../dist/engine.min.js';
+import '../../../dist/remote-control.min.js';
+
+// import '@blackprint/engine';
+// import '@blackprint/remote-control';
+
 import { createServer } from "http";
 import { Server } from "socket.io";
 import dotenv from 'dotenv';
@@ -15,7 +20,10 @@ let port = 2345;
 let httpServer = createServer();
 let io = new Server(httpServer, {
   cors: {
-    origin: ["http://localhost:6789", "https://blackprint.github.io"],
+    origin: [
+		"https://blackprint.github.io", // Online Blackprint Editor
+		"http://localhost:6789", // Local Blackprint Editor
+	],
   }
 });
 
