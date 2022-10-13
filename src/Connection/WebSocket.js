@@ -8,7 +8,7 @@ class extends Blackprint.Node {
 		AccessToken: String,
 	};
 	static output = {
-		Client: DiscordJS.Client || fType('Client'),
+		Client: fType(DiscordLib, 'Client'),
 		Ready: Boolean,
 	};
 
@@ -27,16 +27,16 @@ class extends Blackprint.Node {
 		let { Output } = this.ref;
 		Output.Client?.destroy();
 		Output.Ready = false;
-		let client = Output.Client = new DiscordJS.Client({ intents: new DiscordJS.IntentsBitField(IntentsBits) });
+		let client = Output.Client = new DiscordLib.Client({ intents: new DiscordLib.IntentsBitField(IntentsBits) });
 
 		client.once('ready', () => Output.Ready = true);
 		client.login(AccessToken);
 	}
 
 	disconnect(){
-		let {Output} = this.ref; 
+		let { Output } = this.ref;
 
-		this.ref.Output.Client?.destroy();
+		Output.Client?.destroy();
 		Output.Ready = false;
 	}
 });

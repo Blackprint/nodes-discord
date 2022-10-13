@@ -12,24 +12,36 @@ let Blackprint = window.Blackprint.loadScope({
 	hasDocs: true,
 });
 
-let DiscordJS = {};
+let DiscordLib = {};
 if(Blackprint.Environment.isNode){
 	// ToDo: fix
-	DiscordJS = await import('file:'+process.cwd()+'/node_modules/discord.js/src/index.js');
-}
-else{
-	// 1
+	DiscordLib = await import('file:'+process.cwd()+'/node_modules/discord.js/src/index.js');
 }
 
-// Fake Type, for browser
+// Try obtain the class, if not exist then create fake type only for browser
 let _fType = {};
-let fType = function(name){
+let fType = function(obj, name){
+	let type = obj[name];
+
+	if(type == null)
+		type = deepProperty(obj, name.split('.'));
+
+	if(type != null) return type;
+
 	if(_fType[name] == null){
 		let temp = _fType[name] = class{};
 		Object.defineProperty(temp, 'name', {value: name});
 	}
 
 	return _fType[name];
+}
+
+function deepProperty(obj, path){
+	for(var i = 0; i < path.length; i++){
+		if((obj = obj[path[i]]) == null) return;
+	}
+
+	return obj;
 }
 
 // Global shared context (share to _init.sf)
