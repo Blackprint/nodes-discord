@@ -1,5 +1,5 @@
 /**
- * Listen for error from the client
+ * Listen if bot request was invalidated
  * @summary Discord
  * @blackprint node
  */
@@ -21,7 +21,7 @@ class extends Blackprint.Node {
 		super(instance);
 
 		let iface = this.setInterface();
-		iface.title = "Error";
+		iface.title = "Invalidated";
 	}
 
 	init(){
@@ -35,7 +35,7 @@ class extends Blackprint.Node {
 		let { Input, Output } = this.ref; // Shortcut
 		let client = Input.Client; // Store reference to variable
 
-		this.unlisten = () => client.off('error', this._callback);
-		client.on('error', this._callback = (data) => Output.Data = data);
+		this.unlisten = () => client.off('invalidated', this._callback);
+		client.on('invalidated', this._callback = (data) => Output.Data = data);
 	}
 });

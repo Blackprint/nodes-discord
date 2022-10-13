@@ -1,9 +1,9 @@
 /**
- * Listen for error from the client
+ * Listen for event from the client
  * @summary Discord
  * @blackprint node
  */
-Blackprint.registerNode("Discord/Event/Error",
+Blackprint.registerNode("Discord/Event/Role/Update",
 class extends Blackprint.Node {
 	// Node type: event listener
 	static type = 'event';
@@ -21,7 +21,7 @@ class extends Blackprint.Node {
 		super(instance);
 
 		let iface = this.setInterface();
-		iface.title = "Error";
+		iface.title = "Role Update";
 	}
 
 	init(){
@@ -35,7 +35,7 @@ class extends Blackprint.Node {
 		let { Input, Output } = this.ref; // Shortcut
 		let client = Input.Client; // Store reference to variable
 
-		this.unlisten = () => client.off('error', this._callback);
-		client.on('error', this._callback = (data) => Output.Data = data);
+		this.unlisten = () => client.off('roleUpdate', this._callback);
+		client.on('roleUpdate', this._callback = (data) => Output.Data = data);
 	}
 });
