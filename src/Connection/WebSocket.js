@@ -17,20 +17,42 @@ class extends Blackprint.Node {
 
 		let iface = this.setInterface();
 		iface.title = "WebSocket";
+		this._toast = new NodeToast(iface);
+
+		this._toast.warn("Disconnected");
 	}
 
 	connect(){
 		let { IntentsBits, AccessToken } = this.ref.Input;
 		if(IntentsBits == null || !AccessToken) return;
-		if(!Blackprint.Environment.isNode) return;
+
+		if(!Blackprint.Environment.isNode)
+			return this._toast.warn("Blackprint remote engine is required");
+
+		this.syncOut("warn", "Connecting");
 
 		let { Output } = this.ref;
 		Output.Client?.destroy();
 		Output.Ready = false;
 		let client = Output.Client = new DiscordLib.Client({ intents: new DiscordLib.IntentsBitField(IntentsBits) });
 
-		client.once('ready', () => Output.Ready = true);
+		client.once('ready', () => {
+			this.syncOut("success", "Connected");
+			Output.Ready = true;
+		});
+
 		client.login(AccessToken);
+	}
+
+	syncIn(id, val){
+		if(!Blackprint.Environment.isBrowser) return;
+
+		let toast = this._toast;
+		if(id === 'warn') toast.warn(val);
+		if(id === 'success') {
+			toast.clear();
+			toast.success(val);
+		}
 	}
 
 	disconnect(){
@@ -38,5 +60,7 @@ class extends Blackprint.Node {
 
 		Output.Client?.destroy();
 		Output.Ready = false;
+
+		this._toast.warn("Disconnected");
 	}
 });
