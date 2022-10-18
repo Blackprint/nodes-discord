@@ -3,7 +3,7 @@
  * @summary Discord
  * @blackprint node
  */
-Blackprint.registerNode("Discord/Event/Error",
+Blackprint.registerNode("Discord/Event/Warn",
 class extends Blackprint.Node {
 	// Node type: event listener
 	static type = 'event';

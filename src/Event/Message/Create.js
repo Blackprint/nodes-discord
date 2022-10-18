@@ -23,11 +23,11 @@ class extends Blackprint.Node {
 			/** Message Creation Date */
 			CreatedAt: { type: Date, field: 'createdAt' },
 			/** Message Author */
-			Author: { type: fType(DiscordLib, 'User'), field: 'author' },
+			Author: { type: Types.User, field: 'author' },
 			/** Channel where the message was sent */
-			Channel: { type: fType(DiscordLib, 'BaseGuildTextChannel'), field: 'channel' },
+			Channel: { type: Types.BaseChannel, field: 'channel' },
 			/** Guild where the message was sent */
-			Guild: { type: fType(DiscordLib, 'Guild'), field: 'guild' },
+			Guild: { type: Types.Guild, field: 'guild' },
 
 			/** Thread where the message was sent */
 			// Thread: { type: fType(DiscordLib, 'ThreadChannel'), field: 'Thread' },

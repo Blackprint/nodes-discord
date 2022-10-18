@@ -13,10 +13,9 @@ let Blackprint = window.Blackprint.loadScope({
 });
 
 let DiscordLib = {};
-if(Blackprint.Environment.isNode){
-	// ToDo: fix
+if(Blackprint.Environment.isNode)
 	DiscordLib = await import('file:'+process.cwd()+'/node_modules/discord.js/src/index.js');
-}
+
 
 // Try obtain the class, if not exist then create fake type only for browser
 let _fType = {};
