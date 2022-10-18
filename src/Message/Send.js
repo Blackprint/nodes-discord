@@ -1,7 +1,7 @@
-Blackprint.registerNode("Discord/TextChannel/SendMessage",
+Blackprint.registerNode("Discord/Message/Send",
 class extends Blackprint.Node {
 	static input = {
-		Send: Blackprint.Port.Trigger(port => port.iface.node.send()),
+		Exec: Blackprint.Port.Trigger(port => port.iface.node.send()),
 		TextChannel: fType(DiscordLib, 'BaseGuildTextChannel'),
 		Content: String,
 	};
