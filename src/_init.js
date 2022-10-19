@@ -6,7 +6,7 @@ let Blackprint = window.Blackprint.loadScope({
 	url: import.meta.url,
 
 	// This will autoload (*.sf.mjs) and (*.sf.css) file for Browser
-	// hasInterface: true,
+	hasInterface: true,
 
 	// This will autoload (*.docs.json) for Browser
 	hasDocs: true,
@@ -26,6 +26,9 @@ let fType = function(obj, name){
 		type = deepProperty(obj, name.split('.'));
 
 	if(type != null) return type;
+
+	if(Blackprint.Environment.isNode)
+		throw new Error(`'Discord.${name}' class contructor was not found`);
 
 	if(_fType[name] == null){
 		let temp = _fType[name] = class{};
