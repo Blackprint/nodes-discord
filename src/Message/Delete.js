@@ -6,7 +6,7 @@
 Blackprint.registerNode("Discord/Message/Delete",
 class extends Blackprint.Node {
 	static input = {
-		Exec: Blackprint.Port.Trigger(port => port.iface.send()),
+		Exec: Blackprint.Port.Trigger(port => port.iface.node.send()),
 		Message: fType(DiscordLib, 'Message'),
 	};
 	static output = {
