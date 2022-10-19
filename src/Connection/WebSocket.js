@@ -1,3 +1,8 @@
+/**
+ * Initiate WebSocket connection to Discord's server
+ * @summary Discord.js
+ * @blackprint node
+ */
 Blackprint.registerNode("Discord/Connection/WebSocket",
 class extends Blackprint.Node {
 	static input = {
