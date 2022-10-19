@@ -32,6 +32,7 @@ module.exports = {
 
 		combine:[ // Relative to this config's directory
 			'src/_init.js', // Rule order/index may have different priority
+			'src/SlashCommand/Autocomplete/*.js', // Rule order/index may have different priority
 			'src/**/*.js',
 		],
 	},
