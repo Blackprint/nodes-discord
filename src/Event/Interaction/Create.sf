@@ -1,0 +1,60 @@
+## html
+<div class="node {{ type }}" style="transform: translate({{ x }}px, {{ y }}px)">
+  <sf-template path="Blackprint/nodes/template/routes.sf"></sf-template>
+  <sf-template path="Blackprint/nodes/template/header.sf"></sf-template>
+
+  <div class="content">
+    <select value="{{ data.type }}" type="number">
+		<option value="0" selected>Any Interaction</option>
+		<option value="1">Is Button</option>
+		<option value="2">Is Autocomplete</option>
+		<option value="3">Is ChatInputCommand</option>
+		<option value="4">Is Command</option>
+		<option value="5">Is ContextMenuCommand</option>
+		<option value="6">Is MessageComponent</option>
+		<option value="7">Is MessageContextMenuCommand</option>
+		<option value="8">Is ModalSubmit</option>
+		<option value="9">Is SelectMenu</option>
+		<option value="10">Is UserContextMenuCommand</option>
+	</select>
+
+    <div class="left-port">
+      <sf-template path="Blackprint/nodes/template/input-port.sf"></sf-template>
+    </div>
+
+    <div class="right-port">
+      <sf-template path="Blackprint/nodes/template/output-port.sf"></sf-template>
+    </div>
+  </div>
+
+  <sf-template path="Blackprint/nodes/template/other.sf"></sf-template>
+</div>
+
+## scss-global
+sf-space[blackprint] BPIC-Discord-Event-Interaction-Create .node {
+	select{
+		display: block;
+	}
+}
+
+
+## js-global
+Blackprint.Sketch.registerInterface('BPIC/Discord/Event/Interaction/Create',
+class extends Blackprint.Interface{
+	constructor(node){
+		super(node);
+		this.data = new DiscordEventInteractionCreate(this);
+	}
+});
+
+class DiscordEventInteractionCreate {
+	#iface = null;
+	constructor(iface){this.#iface = iface}
+
+	_type = 0;
+	get type(){return this._type}
+	set type(data){
+		this._type = data;
+		this.#iface.node.syncOut('type', data);
+	}
+}
