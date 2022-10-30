@@ -25,6 +25,7 @@ class extends Blackprint.Node {
 		this._toast = new NodeToast(iface);
 
 		this._toast.warn("Disconnected");
+		setTimeout(() => this.syncOut("syncStatus"), 600);
 	}
 
 	connect(){
@@ -51,6 +52,8 @@ class extends Blackprint.Node {
 
 	syncIn(id, val){
 		if(!Blackprint.Environment.isBrowser) return;
+		if(id === 'syncStatus' && this.ref.Output.Ready)
+			this.syncOut("success", "Connected");
 
 		let toast = this._toast;
 		if(id === 'warn') toast.warn(val);
