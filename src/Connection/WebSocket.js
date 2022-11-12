@@ -51,9 +51,11 @@ class extends Blackprint.Node {
 	}
 
 	syncIn(id, val){
+		if(id === 'syncStatus' && this.ref.Output.Ready){
+			setTimeout(() => this.syncOut("success", "Connected"), 100);
+		}
+
 		if(!Blackprint.Environment.isBrowser) return;
-		if(id === 'syncStatus' && this.ref.Output.Ready)
-			this.syncOut("success", "Connected");
 
 		let toast = this._toast;
 		if(id === 'warn') toast.warn(val);
