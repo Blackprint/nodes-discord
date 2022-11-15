@@ -29,11 +29,12 @@ class extends Blackprint.Node {
 		iface.title = "Text input box";
 	}
 
+	request(){this.update()}
 	update(){
 		let { Input, Output } = this.ref; // Shortcut
 		if(!Input.CustomId || !Input.Label) return;
 
-		Output.Object = new TextInputBuilder()
+		Output.Object = new DiscordLib.TextInputBuilder()
 			.setCustomId(Input.CustomId)
 			.setLabel(Input.Label)
 			.setStyle(Input.Style);
