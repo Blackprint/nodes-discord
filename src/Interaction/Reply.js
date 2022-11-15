@@ -11,6 +11,8 @@ class extends Blackprint.Node {
 		Interaction: fType(DiscordLib, 'BaseInteraction'),
 		/** Text content of the message */
 		Content: String,
+		/** Show only for the user? */
+		Ephemeral: Boolean,
 	};
 	static output = {
 		Message: fType(DiscordLib, 'Message'),
@@ -27,7 +29,10 @@ class extends Blackprint.Node {
 		let { Input, Output } = this.ref; // Shortcut
 		if(Input.Interaction == null) return;
 
-		let temp = await Input.Interaction.reply(Input.Content);
+		let temp = await Input.Interaction.reply({
+			content: Input.Content,
+			ephemeral: Input.Ephemeral,
+		});
 		temp = await temp.awaitMessageComponent();
 		Output.Message = temp.message;
 	}
