@@ -2,7 +2,7 @@
 [![Build Status](https://github.com/blackprint/template-js/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/blackprint/template-js/actions/workflows/build.yml)
 
 ## Discord.js nodes for Blackprint
-This module gives you an ability to use [Discord.js](https://discord.js.org/) with [Blackprint](https://github.com/Blackprint/Blackprint).
+This module gives you an ability to use [Discord.js](https://discord.js.org/) with [Blackprint](https://github.com/Blackprint/Blackprint). Unlike other module that can directly be used on Browser, this module require you to connect into Node.js via remote engine.
 
 ## Import this nodes from URL
 Please specify the version to avoid breaking changes.
@@ -19,9 +19,9 @@ Blackprint.loadModuleFromURL([
 
 ## Development URL
 You can use this link to load unpublished nodes and still under development on GitHub.<br>
-https://cdn.jsdelivr.net/gh/blackprint/nodes-discord@dist/nodes-discord.mjs?1
+https://cdn.jsdelivr.net/gh/blackprint/nodes-discord@dist/nodes-discord.mjs
 
-Please append `/url-here?random-number` if your browser still using the cached files after the repository was updated.
+Replace `dist` with your latest commit hash (from `dist` branch) to avoid cache from CDN.
 
 ### License
 MIT
