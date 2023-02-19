@@ -22,7 +22,7 @@ class extends Blackprint.Node {
 	request(){this.update()}
 	update(){
 		let { Input, Output } = this.ref; // Shortcut
-		if(!Input.Interaction) return;
+		if(!Input.Interaction?.isAutocomplete()) return;
 
 		Input.Interaction.respond(Input.Choices.map(str => ({ name: str, value: str })));
 	}
