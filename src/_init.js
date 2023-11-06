@@ -49,6 +49,10 @@ function deepProperty(obj, path){
 // Global shared context (share to _init.sf)
 let Context = Blackprint.createContext('Discord');
 
+// Expose the fake types and the imported library so it can be accessed or extended by other module
+Context.DiscordType = fType;
+Context.DiscordLib = DiscordLib;
+
 // This is needed to avoid duplicated event listener when using hot reload
 // Event listener that registered with same slot will be replaced
 Context.EventSlot = {slot: 'my-private-event-slot'};
